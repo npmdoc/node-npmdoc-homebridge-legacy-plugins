@@ -1,0 +1,129 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a>homebridge-legacy-plugins (v0.2.0)</a>
+</h1>
+<h4>Legacy plugins for homebridge: https://github.com/nfarina/homebridge</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.homebridge-legacy-plugins">module homebridge-legacy-plugins</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.homebridge-legacy-plugins.homebridge-legacy-plugins">
+            function <span class="apidocSignatureSpan"></span>homebridge-legacy-plugins
+            <span class="apidocSignatureSpan">(homebridge)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.homebridge-legacy-plugins" id="apidoc.module.homebridge-legacy-plugins">module homebridge-legacy-plugins</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.homebridge-legacy-plugins.homebridge-legacy-plugins" id="apidoc.element.homebridge-legacy-plugins.homebridge-legacy-plugins">
+        function <span class="apidocSignatureSpan"></span>homebridge-legacy-plugins
+        <span class="apidocSignatureSpan">(homebridge)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">homebridge-legacy-plugins = function (homebridge) {
+
+  // make the homebridge API object available to accessories and platforms that weren't
+  // designed with it in mind
+  api.homebridge = homebridge;
+
+  // load up all legacy accessories
+  var accessoriesDir = path.join(__dirname, "accessories");
+
+  fs.readdirSync(accessoriesDir).forEach(function(file) {
+    if (file.indexOf(".js") &gt; 0) {
+      var name = file.replace(".js","");
+      homebridge.registerAccessory("homebridge-legacy-plugins", name, function(logger, config) {
+        console.log("Loading legacy accessory " + name);
+
+        var accessoryModule = require(path.join(accessoriesDir, file));
+        return new accessoryModule.accessory(logger, config);
+      });
+    }
+  });
+
+  // load up all legacy platforms
+  var platformsDir = path.join(__dirname, "platforms");
+
+  fs.readdirSync(platformsDir).forEach(function(file) {
+    if (file.indexOf(".js") &gt; 0) {
+      var name = file.replace(".js","");
+      homebridge.registerPlatform("homebridge-legacy-plugins", name, function(logger, config) {
+        console.log("Loading legacy platform " + name);
+
+        var platformModule = require(path.join(platformsDir, file));
+        return new platformModule.platform(logger, config);
+      });
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
